@@ -55,10 +55,10 @@ for series in response.json():
                 # Only these fields removed
                 dcm.PatientName = dcm.PatientID
                 dcm.PatientBirthDate = '00000000'
-                dcm.PatientWeight = '00.0'
-
-                # Make output directory
-                seriespth = path.join(outpth, dcm.PatientID, 'Series_' + str(dcm.SeriesNumber) + '_' + dcm.SeriesDescription)
+                dcm.ReferringPhyscianName = ''
+                # Make output directory (now with time)
+                tstr = f"{dcm.StudyDate}T{int(float(dcm.StudyTime))}"
+                seriespth = path.join(outpth, dcm.PatientID, tstr, 'Series_' + str(dcm.SeriesNumber) + '_' + dcm.SeriesDescription)
                 os.makedirs(seriespth, exist_ok=True)
 
                 # Save anonymized file
