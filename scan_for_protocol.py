@@ -53,6 +53,6 @@ else:
 df_selected = df[['ProtocolName', 'SequenceName', 'SeriesDescription']]
 df.to_csv('series_details.tsv', sep='\t', index=False)
 df_selected.to_csv('series_details_selected.tsv', sep='\t', index=False)
-df_selected = df_selected.drop_duplicates()
+df_selected = df_selected.groupby(df_selected.columns.tolist(),as_index=False).size()
 df_selected = df_selected.sort_values('SeriesDescription')
 df_selected = df_selected.to_csv('series_details_selected_unique.tsv', sep='\t', index=False)
